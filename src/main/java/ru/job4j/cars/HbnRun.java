@@ -5,14 +5,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import ru.job4j.cars.model.Car;
 import ru.job4j.cars.model.Driver;
 import ru.job4j.cars.model.Engine;
 
 public class HbnRun {
-    private static final Logger LOG = LoggerFactory.getLogger(HbnRun.class.getName());
     public static void main(String[] args) {
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure().build();
@@ -37,7 +34,7 @@ public class HbnRun {
             session.persist(second);
             session.getTransaction().commit();
         } catch (Exception e) {
-            LOG.error("Exception in main HbnRun : ", e);
+            e.printStackTrace();
         } finally {
             StandardServiceRegistryBuilder.destroy(registry);
         }
