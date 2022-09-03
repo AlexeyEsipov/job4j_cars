@@ -1,21 +1,12 @@
-create table if not exists engine(
+create table if not exists auto_user(
     id serial primary key,
-    power int not null
+    login varchar(50),
+    password varchar(50)
 );
 
-create table if not exists driver(
+create table if not exists auto_post(
        id serial primary key,
-       name varchar(128) not null
-);
-
-create table if not exists car(
-     id serial primary key,
-     model varchar(128) not null,
-     engine_id int not null  references engine(id) unique
-);
-
-create table if not exists history_owner(
-       id serial primary key,
-       driver_id int not null references driver(id),
-       car_id int not null references car(id)
+       text text,
+       created timestamp,
+       auto_user_id int not null references auto_user(id)
 );
