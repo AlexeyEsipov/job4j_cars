@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name="price_history")
+@Table(name = "price_history")
 
 public class PriceHistory {
     @Id
