@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,4 +29,11 @@ public class Post {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "price_history_id")
     private List<PriceHistory> priceHistory;
+    @ManyToMany
+    @JoinTable(
+            name = "participates",
+            joinColumns = { @JoinColumn(name = "auto_post_id") },
+            inverseJoinColumns = { @JoinColumn(name = "auto_user_id") }
+    )
+    private Set<User> participates;
 }
