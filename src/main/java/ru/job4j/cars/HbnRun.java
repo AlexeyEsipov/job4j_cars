@@ -16,7 +16,7 @@ public class HbnRun {
         try (SessionFactory sf = new MetadataSources(registry).buildMetadata().buildSessionFactory();
              Session session = sf.openSession()) {
             session.beginTransaction();
-            Engine engine = Engine.of(3);
+            Engine engine = Engine.of("3");
             session.save(engine);
             Driver one = Driver.of("Petr");
             Driver two = Driver.of("Stas");
