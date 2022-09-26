@@ -11,11 +11,11 @@ public class Engine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int power;
+    private String name;
 
-    public static Engine of(int power) {
+    public static Engine of(String name) {
         Engine engine = new Engine();
-        engine.power = power;
+        engine.name = name;
         return engine;
     }
 }

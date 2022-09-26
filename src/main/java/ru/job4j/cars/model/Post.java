@@ -23,9 +23,6 @@ public class Post {
     private int id;
     private String description;
     private LocalDateTime created = LocalDateTime.now();
-    @ManyToOne
-    @JoinColumn(name = "user_role_id")
-    private User author;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "price_history_id")
     private List<PriceHistory> priceHistory;

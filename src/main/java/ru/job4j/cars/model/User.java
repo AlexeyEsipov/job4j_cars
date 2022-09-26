@@ -5,8 +5,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @Entity
@@ -21,6 +19,4 @@ public class User {
     private int id;
     private String login;
     private String password;
-    @OneToMany (mappedBy = "author", fetch = FetchType.LAZY)
-    private List<Post> posts = new ArrayList<>();
 }
