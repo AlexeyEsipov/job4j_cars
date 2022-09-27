@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -22,7 +22,12 @@ public class Post {
     @EqualsAndHashCode.Include
     private int id;
     private String description;
-    private LocalDateTime created = LocalDateTime.now();
+    private byte[] photo;
+    @ManyToOne
+    @JoinColumn(name = "car_id", foreignKey = @ForeignKey(name = "CAR_ID_FK"))
+    private Car car;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "price_history_id")
     private List<PriceHistory> priceHistory;
