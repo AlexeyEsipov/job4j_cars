@@ -14,17 +14,17 @@ import java.util.Map;
 @ThreadSafe
 @Repository
 public class PostRepository {
-    private static final String PART_QUERY = "select distinct post from Post post "
-            + "join fetch post.priceHistory history "
-            + "join fetch post.car car "
-            + "join fetch post.participates participates ";
-    private static final String CREATED_DESC = "order by post.created desc";
+    private static final String PART_QUERY = "SELECT DISTINCT post FROM Post post "
+            + "JOIN FETCH post.priceHistory history "
+            + "JOIN FETCH post.car car "
+            + "JOIN FETCH post.participates participates ";
+    private static final String CREATED_DESC = " ORDER BY post.created DESC";
 
     private final CrudRepository crudRepository;
 
     public List<Post> findPostLastDay() {
         return crudRepository.query(PART_QUERY
-                        + "where post.created between :aYesterday and :aToday "
+                        + "WHERE post.created BETWEEN :aYesterday and :aToday"
                         + CREATED_DESC, Post.class,
                 Map.of("aYesterday", Timestamp.valueOf(LocalDateTime.now().minusDays(1)),
                         "aToday", Timestamp.valueOf(LocalDateTime.now()))
@@ -34,7 +34,7 @@ public class PostRepository {
     public List<Post> findPostIsPhoto() {
         return crudRepository.query(
                 PART_QUERY
-                        + "where a.photo.size > 0 "
+                        + "WHERE a.photo.size > 0"
                         + CREATED_DESC, Post.class
         );
     }
@@ -42,7 +42,7 @@ public class PostRepository {
     public List<Post> findPostWithModel(String model) {
         return crudRepository.query(
                 PART_QUERY
-                        + "where car.model = :fModel "
+                        + "WHERE car.model = :fModel"
                         + CREATED_DESC, Post.class,
                 Map.of("fModel", model)
         );
