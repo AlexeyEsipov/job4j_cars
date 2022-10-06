@@ -1,9 +1,6 @@
 package ru.job4j.cars.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,6 +11,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Builder(builderMethodName = "of")
 @Entity
 @Table(name = "auto_post")
 public class Post {
@@ -28,9 +26,11 @@ public class Post {
     private Car car;
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
+    @Singular("priceHistory")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "price_history_id")
     private List<PriceHistory> priceHistory;
+    @Singular("participates")
     @ManyToMany
     @JoinTable(
             name = "participates",

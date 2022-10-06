@@ -7,6 +7,7 @@ import ru.job4j.cars.model.Driver;
 
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 @AllArgsConstructor
 @ThreadSafe
@@ -14,11 +15,15 @@ import java.util.Map;
 public class DriverRepository {
     private final CrudRepository crudRepository;
 
+    public Driver add(Driver driver) {
+        crudRepository.run(session -> session.save(driver));
+        return driver;
+    }
+
     public Driver findById(int id) {
         return crudRepository.optional(
                 "from Engine where id = :fId", Driver.class,
-                Map.of("fId", id)).orElse(new Driver()
-        );
+                Map.of("fId", id)).orElseThrow(NoSuchElementException::new);
     }
 
     public List<Driver> findAll() {

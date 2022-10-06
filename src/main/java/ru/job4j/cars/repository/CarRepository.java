@@ -7,6 +7,8 @@ import ru.job4j.cars.model.Car;
 
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
+
 @AllArgsConstructor
 @ThreadSafe
 @Repository
@@ -16,8 +18,7 @@ public class CarRepository {
     public Car findById(int id) {
         return crudRepository.optional(
                 "from Car where id = :fId", Car.class,
-                Map.of("fId", id)).orElse(new Car()
-        );
+                Map.of("fId", id)).orElseThrow(NoSuchElementException::new);
     }
 
     public List<Car> findAll() {

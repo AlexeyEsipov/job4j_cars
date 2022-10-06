@@ -22,6 +22,11 @@ public class PostRepository {
 
     private final CrudRepository crudRepository;
 
+    public Post add(Post post) {
+        crudRepository.run(session -> session.save(post));
+        return post;
+    }
+
     public List<Post> findPostLastDay() {
         return crudRepository.query(PART_QUERY
                         + "WHERE post.created BETWEEN :aYesterday and :aToday"

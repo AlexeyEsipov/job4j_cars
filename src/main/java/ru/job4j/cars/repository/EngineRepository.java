@@ -14,6 +14,11 @@ import java.util.Map;
 public class EngineRepository {
     private final CrudRepository crudRepository;
 
+    public Engine add(Engine engine) {
+        crudRepository.run(session -> session.save(engine));
+        return engine;
+    }
+
     public Engine findById(int id) {
         return crudRepository.optional(
                 "from Engine where id = :fId", Engine.class,
